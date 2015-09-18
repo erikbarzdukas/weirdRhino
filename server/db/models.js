@@ -6,21 +6,15 @@ var Sequelize = require('sequelize');
  */
   
 var PRODUCTION_OPTIONS = {
-  dialect: 'postgres',
-  protocol: 'postgres',
-  dialectOptions: {
-    ssl: true,
-  }
 }
 // dburl = "postgres://postgres@localhost/stackmatch_test"
 
 var TESTING_OPTIONS = {
-  dialect: 'postgres'
 }
 
 var setDbUrl = function() {
-  if (process.env['DATABASE_URL']) {
-    return process.env['DATABASE_URL']
+  if (process.env['CLEARDB_DATABASE_URL']) {
+    return process.env['CLEARDB_DATABASE_URL']
   } else if (process.env['TESTING']) {
     return 'postgres://postgres@localhost/stackmatch_test';
   } else {
@@ -29,7 +23,7 @@ var setDbUrl = function() {
 }
 
 var setOptions = function() {
-  if (process.env['DATABASE_URL']) {
+  if (process.env['CLEARDB_DATABASE_URL']) {
     return PRODUCTION_OPTIONS;
   } else if (process.env['TESTING']) {
     return TESTING_OPTIONS;
